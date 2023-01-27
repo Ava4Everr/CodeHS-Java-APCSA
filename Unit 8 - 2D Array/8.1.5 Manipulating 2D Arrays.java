@@ -27,9 +27,8 @@ public class ArrayPractice
     {
         arr[row][col] = value;
     }
-    
-    
-    
+
+
     //Do not make alterations to this method!
     public static void print(int[][] array)
     {
