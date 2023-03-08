@@ -2,87 +2,101 @@ public class TicTacToe
 {
    //copy over your constructor from the Tic Tac Toe Board activity in the previous lesson!
    private int turn;
-   private char board[][] = {{'-','-','-'},{'-','-','-'},{'-','-','-'}};
-   
+   private String[][] board = new String[3][3];
+    
+    public TicTacToe() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = "-";
+            }
+        }
+    }
+    
    //this method returns the current turn
    public int getTurn()
    {
-       return this.turn;
+        return turn;
    }
    
    /*This method prints out the board array on to the console
    */
    public void printBoard()
-   {
-       System.out.println("\n 0 1 2");
-       for (int i = 0; i < 3; i++)
-       {
-           System.out.println(i + " " + this.board[i][0] + " " + this.board[i][1] + " "+ this.board[i][2]);
-       }
-   }
+    {   
+        System.out.println("  0 1 2");
+        int row = 0;
+        for(String[] array : board)
+        {
+            System.out.print(row + " ");
+            for(String item : array)
+            {
+                System.out.print(item + " ");
+                
+            }
+            row++;
+            System.out.println();
+        }
+    }
    
    //This method returns true if space row, col is a valid space
    public boolean pickLocation(int row, int col)
    {
-       return this.board[row][col] == '-';
+        if (board[row][col] == "-") {
+           return true;
+        } /*else {
+            return false;  
+        }*/
+        return false;
    }
    
    //This method places an X or O at location row,col based on the int turn
    public void takeTurn(int row, int col)
    {
-       char sym;
-       if (this.turn % 2 == 0)
-       {
-           sym = 'X';
-       }
-       else 
-       {
-           sym = 'O';
-       }
-       this.turn++;
-       this.board[row][col] = sym;
+        if (turn % 2 == 0) {
+            board[row][col] = "X";
+        } else {
+            board[row][col] = "O";
+        }
+        turn++;
    }
    
    //This method returns a boolean that returns true if a row has three X or O's in a row
    public boolean checkRow()
    {
-       for (int i = 0; i < 3; i++)
-       {
-           if (this.board[i][0] == this.board[i][1] && this.board[i][1] == this.board[i][2] && board[i][0] != '-')
-           {
-               return true;
-           }
-       }
-       return false;
+        for (int i = 0; i < board.length; i++){
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2] && board[i][0] != "-") {
+                return true;
+            }
+        }
+        return false;
    }
    
     //This method returns a boolean that returns true if a col has three X or O's
    public boolean checkCol()
    {
-       for (int i = 0; i < 3; i++)
-       {
-           if (this.board[0][i] == this.board[1][i] && this.board[1][i] == this.board[2][i] && board[i][0] != '-')
-           {
-               return true;
-           }
-       }
-       return false;
+       for (int j = 0; j < board.length; j++){
+            if (board[0][j] == board[1][j] && board[1][j] == board[2][j] && board[0][j] != "-") {
+                return true;
+            }
+        }
+        return false;
    }
    
     //This method returns a boolean that returns true if either diagonal has three X or O's
    public boolean checkDiag()
    {
-       if ((this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2] && board[0][0] != '-') || (this.board[0][2] == this.board[1][1] && this.board[1][1] == this.board[2][0] && board[0][2] != '-'))
-       {
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[0][0] != "-" || board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[0][2] != "-" ) {
            return true;
-       }
-       return false;
+        }
+        return false;
    }
    
    //This method returns a boolean that checks if someone has won the game
    public boolean checkWin()
    {
-       return (checkCol() || checkRow() || checkDiag());
+       if (checkRow() || checkCol() || checkDiag()) {
+           return true;
+       }
+       return false;
    }
 
 }
