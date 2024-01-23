@@ -26,15 +26,15 @@ public class Student
     //Improvement = (67 - 54) + (89 - 67) + (95 - 89) = 41
     public int getExamImprovement()
     {
-    // your code goes here! 
+        // your code goes here! 
+        int improvement = 0;
         if (numExamsTaken == 0) return 0;
-            int min = exams[0];
-            int max = exams[0];
-        for (int i = 0; i < numExamsTaken; i++) {
-            if (exams[i] > max) max = exams[i];
-            if (exams[i] < min) min = exams[i];
-    }
-        return max - min;
+        
+        for (int i = 1; i < numExamsTaken; i++) {
+            improvement += exams[i] - exams[i - 1];
+        }
+        
+        return improvement;
     }
     
     public String getName()
