@@ -8,7 +8,7 @@ public class MatchingString
         // your code goes here!
         for (int i = 0; i < arr.length; i++)
         {
-            if (arr[i] == myString)
+            if (arr[i].equals(myString))
             {
                 return i;
             }
